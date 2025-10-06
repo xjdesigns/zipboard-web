@@ -1,0 +1,58 @@
+.fn-core {
+  display: flex;
+  height: 100vh;
+}
+
+.fn-header {
+  display: flex;
+  align-items: center;
+  padding-right: var(--sl-spacing-x-small);
+  border-bottom: 1px solid var(--sl-color-neutral-200);
+
+  .fn-header-logo {
+    margin-right: 16px;
+
+    img {
+      display: block;
+      height: 40px;
+    }
+  }
+
+  .fn-header-title {
+    flex: 1;
+  }
+}
+
+.fn-header-user {
+  sl-avatar {
+    --size: 2rem;
+  }
+}
+
+.fn-sidenav {
+  padding: var(--sl-spacing-large);
+  border-right: 1px solid var(--sl-color-neutral-200);
+}
+
+.fn-app {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.fn-app-content {
+  flex: 1;
+  padding: var(--sl-spacing-small);
+}
+
+.fn-main-page {
+  display: flex;
+  gap: var(--sl-spacing-small);
+}
+
+.fn-card {
+  flex: 0 0 25%;
+  padding: var(--sl-spacing-medium);
+  border: 1px solid var(--sl-color-neutral-200);
+  border-radius: 8px;
+}
