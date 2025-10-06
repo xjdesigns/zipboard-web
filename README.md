@@ -1,4 +1,6 @@
-# React + Vite + Shoelave
+# Zipboard Web
+
+## React + Vite + Shoelace
 
 This project is a quick bootstrap for using React + Vite + Shoelace.
 
