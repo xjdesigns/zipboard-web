@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react'
 import {
   SlButtonGroup,
@@ -29,11 +30,15 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
   const [showDates, setShowDates] = useState(data.ui.showDates)
   const [showTypes, setShowTypes] = useState(data.ui.showTypes)
   const [stackActions, setStackActions] = useState(data.ui.stackActions)
+  const [smallView, setSmallView] = useState(data.ui.smallView ?? false)
+  const [viewAlign, setViewAlign] = useState(data.ui.viewAlign ?? 'left')
+  const [hasColumns, setHasColumns] = useState(data.ui.hasColumns ?? false)
   const searchRule = data.ui.searchRule
 
   useEffect(() => {
     const body = document.querySelector('body')
     const fn = (ev) => {
+      // TODO: bug on mobile where shift is automatic for caps
       if (ev.key === 'E') {
         setSettingsOpen(true)
       }
@@ -143,6 +148,24 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
     console.log('data', data)
   }
 
+  const handleSmallView = (ev) => {
+    const isSmall = ev.target.checked
+    setSmallView(isSmall)
+    handleSaveUI(isSmall, 'smallView')
+  }
+
+  const handleViewAlign = (ev) => {
+    const align = ev.target.value
+    setViewAlign(align)
+    handleSaveUI(align, 'viewAlign')
+  }
+
+  const handleColumns = (ev) => {
+    const columns = ev.target.checked
+    setHasColumns(columns)
+    handleSaveUI(columns, 'hasColumns')
+  }
+
   return (
     <>
       <header className="zp-header">
@@ -227,6 +250,49 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
               <SlSwitch checked={stackActions} onSlChange={handleStackActions} size="small">
                 Stack Actions
               </SlSwitch>
+            </div>
+            <div className="zp-divider" />
+            {/* NOTE: Small view simulates the window size as if Electon app starting size */}
+            <div>
+              (Web Only)
+            </div>
+            <div className="zp-input-flex">
+              <div>
+                <SlSwitch checked={smallView} onSlChange={handleSmallView} size="small">
+                  Small View
+                </SlSwitch>
+              </div>
+              <div>
+                <SlSelect size="small" value={viewAlign} onSlChange={handleViewAlign}>
+                  <SlOption value="left">
+                    <SlIcon name="justify-left" slot="suffix" />
+                    left
+                  </SlOption>
+                  <SlOption value="center">
+                    <SlIcon name="justify" slot="suffix" />
+                    middle
+                  </SlOption>
+                  <SlOption value="right">
+                    <SlIcon name="justify-right" slot="suffix" />
+                    right
+                  </SlOption>
+                </SlSelect>
+              </div>
+            </div>
+            <div>
+              <div>
+                <SlSwitch
+                  label="Columns"
+                  checked={hasColumns}
+                  onSlChange={handleColumns}
+                  size="small"
+                >
+                  Columns (experimental)
+                </SlSwitch>
+                <div className="zp-text-small zp-text-small--dim">
+                  Works above 760px width, item might wrap weird, horizontal overflow scroll. It might also has strange behavior with other UI options.
+                </div>
+              </div>
             </div>
             <div className="zp-divider" />
             <div className="zp-mg-bt">

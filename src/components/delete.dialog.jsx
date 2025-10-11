@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { SlButton, SlButtonGroup, SlDialog } from './shoelace'
 
 export const DeleteDialog = ({ isOpen, itemToDelete, deleteItem, closeDelete }) => {
@@ -11,7 +12,7 @@ export const DeleteDialog = ({ isOpen, itemToDelete, deleteItem, closeDelete }) 
   }
 
   return (
-    <SlDialog label="Edit" open={isOpen} onSlAfterHide={handleClose}>
+    <SlDialog label="Delete" open={isOpen} onSlAfterHide={handleClose}>
       <div className="zp-mg-bt">Are you sure you want to delete this item?</div>
       <SlButtonGroup slot="footer">
         <SlButton variant="default" size="small" onClick={handleClose}>

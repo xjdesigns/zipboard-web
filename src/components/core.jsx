@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useMemo } from 'react'
 import { SlInput, SlButton, SlAlert, SlIcon, SlSelect, SlOption, SlBadge } from './shoelace'
 import { searchConversion } from '../util/search'
@@ -17,6 +18,28 @@ function debounce(func, timeout = 300) {
   }
 }
 
+function getViewAlignClass({ smallView, viewAlign, hasColumns }) {
+  if (hasColumns) {
+    return 'zp-core--hascolumns'
+  }
+
+  if (smallView) {
+    let base = 'zp-core--smallview'
+    if (viewAlign === 'left') {
+      base += ' zp-core--left'
+    }
+    if (viewAlign === 'center') {
+      base += ' zp-core--center'
+    }
+    if (viewAlign === 'right') {
+      base += ' zp-core--right'
+    }
+    return base
+  }
+
+  return ''
+}
+
 const Core = ({ data, saveData }) => {
   const [currentInput, setCurrentInput] = useState('')
   const [lengthError, setlengthError] = useState(false)
@@ -26,6 +49,9 @@ const Core = ({ data, saveData }) => {
   const list = data.history || []
   const historyLength = data.ui.historyLength
   const searchRule = data.ui.searchRule
+  const smallView = data.ui.smallView ?? false
+  const viewAlign = data.ui.viewAlign ?? 'left'
+  const hasColumns = data.ui.hasColumns ?? false
 
   const filtered = useMemo(() => {
     let results = list
@@ -172,7 +198,7 @@ const Core = ({ data, saveData }) => {
       </div>
 
       {/* Item List */}
-      <div id="zpCore" className="zp-core">
+      <div id="zpCore" className={`zp-core ${getViewAlignClass({ smallView, viewAlign, hasColumns })}`}>
         <div className="zp-cinner">
           <Items data={data} list={filtered} handleSave={saveData} isSearching={isSearching} />
         </div>

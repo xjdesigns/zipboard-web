@@ -167,6 +167,24 @@ strong {
   padding: 12px;
   flex: 1;
   overflow-y: auto;
+
+  &--hascolumns {
+    @media (min-width: 47.5em) {
+      columns: 3;
+    }
+  }
+
+  &--smallview {
+    width: 380px;
+  }
+
+  &--center {
+    margin: 0 auto;
+  }
+
+  &--right {
+    margin-left: auto;
+  }
 }
 
 .zp-cinner {
@@ -371,4 +389,11 @@ strong {
   sl-button {
     width: 100%;
   }
+}
+
+.zp-input-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
