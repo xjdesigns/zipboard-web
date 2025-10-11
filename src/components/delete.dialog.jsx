@@ -31,8 +31,8 @@ export const DeleteDialog = ({ isOpen, itemToDelete, deleteItem, closeDelete }) 
         <SlButton variant="default" size="small" onClick={handleClose}>
           Close
         </SlButton>
-        <SlButton variant="primary" size="small" onClick={handleDelete}>
-          Update
+        <SlButton variant="danger" size="small" onClick={handleDelete}>
+          Delete
         </SlButton>
       </SlButtonGroup>
     </SlDialog>

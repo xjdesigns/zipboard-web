@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { SlCopyButton, SlIconButton, SlAlert, SlIcon, SlTooltip } from './shoelace'
 import { EditDialog } from './edit-dialog'

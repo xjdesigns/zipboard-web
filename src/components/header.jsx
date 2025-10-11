@@ -3,20 +3,18 @@ import { useState, useEffect } from 'react'
 import {
   SlButtonGroup,
   SlButton,
-  SlCopyButton,
   SlIcon,
   SlDialog,
   SlSwitch,
   SlInput,
-  SlTextarea,
   SlSelect,
   SlOption,
   SlAnimation,
   SlCheckbox
 } from './shoelace'
+import { Validate } from './validate'
 import { toggleTheme } from '../util/theme'
 import { TYPE_OPTIONS } from '../util/item'
-import { validate } from '../util/data'
 import logo from '../assets/icon.png'
 
 const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
@@ -24,7 +22,6 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
   const [showClear, setShowClear] = useState(false)
   const [showData, setShowData] = useState(false)
   const [allowFavDelete, setAllowFavDelete] = useState(false)
-  const [dataToValidate, setDataToValidate] = useState('')
   const [historyLength, setHistoryLength] = useState(data.ui.historyLength)
   const [isLineClamped, setLineClamped] = useState(data.ui.lineClamp)
   const [showDates, setShowDates] = useState(data.ui.showDates)
@@ -141,11 +138,6 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
   const handleToggleRemoveFavorites = (ev) => {
     const checked = ev.target.checked
     setAllowFavDelete(checked)
-  }
-
-  const handleValidation = () => {
-    const data = validate(dataToValidate)
-    console.log('data', data)
   }
 
   const handleSmallView = (ev) => {
@@ -358,32 +350,7 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
           </div>
         )}
 
-        {showData && (
-          <div>
-            <div className="zp-mg-bt">
-              You are entering the <strong className="zp-text-danger">DANGER ZONE.</strong>
-            </div>
-            <div className="zp-data-display">
-              <SlCopyButton value={JSON.stringify(data, null, '  ')} copy-label="Copy saved data" />
-              <div className="zp-data-text-area">
-                <SlTextarea
-                  size="small"
-                  placeholder="Paste your saved history data to use..."
-                  onSlInput={(ev) => setDataToValidate(ev.target.value)}
-                  rows={12}
-                  resize="none"
-                />
-              </div>
-              <SlButton
-                onClick={handleValidation}
-                disabled={dataToValidate.length === 0}
-                size="small"
-              >
-                Validate and Save (BETA)
-              </SlButton>
-            </div>
-          </div>
-        )}
+        {showData && <Validate data={data} />}
 
         <SlButtonGroup slot="footer">
           {(showClear || showData) && (

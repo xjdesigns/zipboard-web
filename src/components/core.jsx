@@ -117,7 +117,7 @@ const Core = ({ data, saveData }) => {
               <SlInput
                 clearable
                 size="small"
-                help-text="Paste a link to save"
+                help-text="Typr or paste a link to save"
                 onSlInput={handleInput}
                 value={currentInput}
                 placeholder="Something cool to reuse"
@@ -183,7 +183,7 @@ const Core = ({ data, saveData }) => {
                 </div>
                 <div className="zp-flex-fill">
                   <SlInput
-                    label="Search History"
+                    label={`Search History (${searchRule})`}
                     clearable
                     size="small"
                     onSlInput={handleSearchValue}
