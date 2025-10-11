@@ -397,3 +397,65 @@ strong {
   justify-content: space-between;
   gap: 12px;
 }
+
+// Delete header styling
+.zp-delete-header-animated {
+  padding-top: 40px;
+}
+.zp-dtrash {
+  position: relative;
+  margin: 0 auto;
+  width: 40px;
+  height: 50px;
+  background: var(--sl-color-neutral-900);
+
+  .zp-dtrash-img {
+    img {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      animation: trashcanimg 2s ease-in-out forwards;
+    }
+  }
+
+  .zp-dtrash-lid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 3px);
+    z-index: 0;
+    background: var(--sl-color-neutral-900);
+    height: 10px;
+    transform: rotate(0deg);
+    transform-origin: bottom left;
+    animation: trashcanlid 1.2s .9s ease-in forwards;
+  }
+}
+
+@keyframes trashcanimg {
+  0%{
+    z-index: 1;
+    transform: translateY(0%) scale(1.4);
+  }
+  70% {
+    z-index: -1;
+    transform: translateY(-200%) scale(1);
+  }
+  100% {
+    z-index: -1;
+    transform: translateY(0%) scale(.3);
+  }
+}
+
+@keyframes trashcanlid {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+}
