@@ -47,7 +47,7 @@ export const EditDialog = ({
       return
     }
 
-    if (currentIndex !== newPosition) {
+    if (allowMove && currentIndex !== newPosition) {
       list.splice(currentIndex, 1)
       list.splice(newPosition, 0, editedData)
       handleSave(list)
@@ -61,6 +61,13 @@ export const EditDialog = ({
       handleSave(newList)
     }
 
+    closeEdit?.()
+  }
+
+  const handleMoveToTop = () => {
+    const item = list.splice(currentIndex, 1)[0]
+    list.splice(0, 0, item)
+    handleSave(list)
     closeEdit?.()
   }
 
@@ -97,21 +104,28 @@ export const EditDialog = ({
         </SlCheckbox>
       </div>
       <div className="zp-mg-bt">
-        <SlSelect
-          size="small"
-          help-text={`Current position is ${currentIndex + 1}`}
-          onSlChange={handleNewPosition}
-          disabled={!allowMove}
-        >
-          {positionMove !== null &&
-            positionList.map((_, idx) => {
-              return (
-                <SlOption key={idx} value={idx} disabled={idx === currentIndex}>
-                  Position - {idx}
-                </SlOption>
-              )
-            })}
-        </SlSelect>
+        <div className="zp-flex">
+          <div className="zp-flex-fill">
+            <SlSelect
+              size="small"
+              help-text={`Current position is ${currentIndex + 1}`}
+              onSlChange={handleNewPosition}
+              disabled={!allowMove}
+            >
+              {positionMove !== null &&
+                positionList.map((_, idx) => {
+                  return (
+                    <SlOption key={idx} value={idx} disabled={idx === currentIndex}>
+                      Position - {idx}
+                    </SlOption>
+                  )
+                })}
+            </SlSelect>
+          </div>
+          <SlButton size="small" onClick={handleMoveToTop}>
+            Move to top
+          </SlButton>
+        </div>
       </div>
 
       <SlButtonGroup slot="footer">
