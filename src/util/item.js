@@ -16,28 +16,34 @@ export const UUID_TYPE = 'UUID'
 
 export const TYPE_OPTIONS = [STANDARD_TYPE, HTTP_TYPE, IMAGE_TYPE, NUMBER_TYPE, UUID_TYPE]
 
-export function itemTypeDetect(item, isFavorite = false) {
+export function getItemType(text) {
   // regex values must live within the scope
   const IMAGE_CHECK = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i
   const NUMBER_CHECK = /^([0-9]|#|\+|\*|-|,|\s)+$/gm
   const UUID_CHECK = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/g
   let itemType = STANDARD_TYPE
 
-  if (IMAGE_CHECK.test(item)) {
+  if (IMAGE_CHECK.test(text)) {
     itemType = IMAGE_TYPE
   }
 
-  if (item.includes(HTTPS_CHECK) || item.includes(HTTP_CHECK)) {
+  if (text.includes(HTTPS_CHECK) || text.includes(HTTP_CHECK)) {
     itemType = HTTP_TYPE
   }
 
-  if (NUMBER_CHECK.test(item)) {
+  if (NUMBER_CHECK.test(text)) {
     itemType = NUMBER_TYPE
   }
 
-  if (UUID_CHECK.test(item)) {
+  if (UUID_CHECK.test(text)) {
     itemType = UUID_TYPE
   }
+
+  return itemType;
+}
+
+export function itemTypeDetect(item, isFavorite = false) {
+  const itemType = getItemType(item)
 
   return {
     text: item,

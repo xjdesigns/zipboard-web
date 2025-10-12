@@ -9,6 +9,7 @@ import {
   SlInput,
   SlDialog
 } from './shoelace'
+import { getItemType } from '../util/item'
 
 export const EditDialog = ({
   isOpen,
@@ -54,7 +55,11 @@ export const EditDialog = ({
     } else {
       const newList = list.map((l, idx) => {
         if (idx === currentIndex) {
-          return editedData
+          const type = getItemType(editedData.text)
+          return {
+            ...editedData,
+            type,
+          }
         }
         return l
       })
