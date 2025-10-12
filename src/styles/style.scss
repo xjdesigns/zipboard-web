@@ -146,7 +146,11 @@ strong {
 
   &--hascolumns {
     @media (min-width: 47.5em) {
-      columns: 3;
+      .zp-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 12px;
+      }
     }
   }
 

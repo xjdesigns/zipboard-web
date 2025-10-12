@@ -35,15 +35,14 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
   useEffect(() => {
     const body = document.querySelector('body')
     const fn = (ev) => {
-      // TODO: bug on mobile where shift is automatic for caps
-      if (ev.key === 'E') {
+      if (ev.ctrlKey && ev.key === 'e') {
         setSettingsOpen(true)
       }
     }
 
-    body.addEventListener('keypress', fn)
+    body.addEventListener('keydown', fn)
 
-    return () => body.removeEventListener('keypress', fn)
+    return () => body.removeEventListener('keydown', fn)
   }, [])
 
   const handleClearHistory = () => {
@@ -282,7 +281,7 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
                   Columns (experimental)
                 </SlSwitch>
                 <div className="zp-text-small zp-text-small--dim">
-                  Works above 760px width, item might wrap weird, horizontal overflow scroll. It might also has strange behavior with other UI options.
+                  Leverages grid to auto-fit columns. Uses auto fit with the min width being 300px.
                 </div>
               </div>
             </div>
