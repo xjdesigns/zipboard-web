@@ -246,6 +246,12 @@ strong {
       display: block;
     }
   }
+
+  &.show-position {
+    .zp-position {
+      display: block;
+    }
+  }
 }
 
 .zp-search-input {
