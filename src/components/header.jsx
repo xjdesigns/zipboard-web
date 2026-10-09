@@ -27,6 +27,7 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
   const [showDates, setShowDates] = useState(data.ui.showDates)
   const [showTypes, setShowTypes] = useState(data.ui.showTypes)
   const [stackActions, setStackActions] = useState(data.ui.stackActions)
+  const [showPosition, setShowPosition] = useState(data.ui.showPosition)
   const [smallView, setSmallView] = useState(data.ui.smallView ?? false)
   const [viewAlign, setViewAlign] = useState(data.ui.viewAlign ?? 'left')
   const [hasColumns, setHasColumns] = useState(data.ui.hasColumns ?? false)
@@ -107,6 +108,12 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
     const checked = ev.target.checked
     setStackActions(checked)
     handleSaveUI(checked, 'stackActions')
+  }
+
+  const handleShowPosition = (ev) => {
+    const checked = ev.target.checked
+    setShowPosition(checked)
+    handleSaveUI(checked, 'showPosition')
   }
 
   const handleSearchRule = (ev) => {
@@ -237,9 +244,14 @@ const Header = ({ data, handleSaveUI, clearHistory, clearHistoryType }) => {
                 Show Types
               </SlSwitch>
             </div>
-            <div>
+            <div className="zp-mg-bt">
               <SlSwitch checked={stackActions} onSlChange={handleStackActions} size="small">
                 Stack Actions
+              </SlSwitch>
+            </div>
+            <div>
+              <SlSwitch checked={showPosition} onSlChange={handleShowPosition} size="small">
+                Show Positions
               </SlSwitch>
             </div>
             <div className="zp-divider" />

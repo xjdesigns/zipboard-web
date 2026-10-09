@@ -1,6 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
-import { SlCopyButton, SlIconButton, SlAlert, SlIcon, SlTooltip } from './shoelace'
+import {
+  SlCopyButton,
+  SlIconButton,
+  SlAlert,
+  SlIcon,
+  SlTooltip,
+} from './shoelace'
 import { EditDialog } from './edit-dialog'
 import { DeleteDialog } from './delete.dialog'
 
@@ -10,6 +16,7 @@ export const Items = ({ data, list, handleSave, isSearching }) => {
   const lineIsClamped = data.ui.lineClamp
   const showDates = data.ui.showDates
   const showTypes = data.ui.showTypes
+  const showPosition = data.ui.showPosition
   const stackActions = data.ui.stackActions ?? false
 
   const handleDelete = (idx) => {
@@ -34,7 +41,7 @@ export const Items = ({ data, list, handleSave, isSearching }) => {
 
   return (
     <div>
-      <div className={`zp-list ${showDates ? 'show-dates' : ''} ${showTypes ? 'show-types' : ''}`}>
+      <div className={`zp-list ${showDates ? 'show-dates' : ''} ${showTypes ? 'show-types' : ''} ${showPosition ? 'show-position' : ''}`}>
         {list.length === 0 && (
           <SlAlert open>
             <SlIcon slot="icon" name="info-circle" />
@@ -72,6 +79,9 @@ export const Items = ({ data, list, handleSave, isSearching }) => {
                   </div>
                   <div className="zp-addon zp-date">{l.date}</div>
                   <div className="zp-addon zp-type">{l.type}</div>
+                  <div className="zp-addon zp-position">
+                    Position: {idx}
+                  </div>
                 </div>
                 <div className="zp-fav-btns">
                   <div className="zp-fav-copy">
